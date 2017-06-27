@@ -6,3 +6,4 @@ hello world 123
 a1
 a2
 add abc.txt!
+del abc.txt!
