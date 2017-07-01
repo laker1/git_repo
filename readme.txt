@@ -5,7 +5,7 @@ Git tracks changes of files.
 hello world 123
 a1
 a2
-add abc.txt!
+add abc.txt! a a a a a
 del abc.txt!
 yesterday is passed!
 Creating a new branch is quick.
