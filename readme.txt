@@ -11,3 +11,4 @@ yesterday is passed!
 Creating a new branch is quick.
 add dev4
 add dev5
+current
