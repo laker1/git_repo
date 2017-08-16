@@ -37,16 +37,157 @@
 	skyStyle.addColorStop(0.9,'indigo');
 	skyStyle.addColorStop(1.0,'#ba8748');
 
+	// ctx.globalAlpha=0.7;
+
+	ctx.shadowColor='gray';
+	ctx.shadowOffsetX=10;
+	ctx.shadowOffsetY=10;
+	ctx.shadowBlur=10;
 
 
-	ctx.globalAlpha=0.7;
-	for(var i=0;i<100;i++){
-		ctx.fillStyle=randomColor();
-		ctx.beginPath();
-		ctx.arc(Math.random()*canvas.width,Math.random()*canvas.height,Math.random()*100,0,2*Math.PI);
-		ctx.closePath();
+/* 非零环绕原则 */
+	// ctx.beginPath();
+	// ctx.arc(600,400,300,0,2*Math.PI,true);
+	// ctx.arc(600,400,150,0,2*Math.PI,false);
+	// ctx.closePath();
+	// ctx.fillStyle='#058';
+	// ctx.fill();
+
+/* 非零环绕原则 */
+	ctx.beginPath();
+	ctx.rect(100,100,600,600);
+	pathRect(ctx,200,200,400,200);
+	pathTriangle(ctx,300,450,150,650,450,650);
+	ctx.arc(550,550,100,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fillStyle='#058';
+	ctx.fill();
+
+
+
+	/* clip蒙版效果 */
+	// setInterval(function() {
+	// 	drawClip(ctx);
+	// 	updateClip(ctx);
+	// }, 50);
+	var clip={
+		x:600,
+		y:400,
+		r:200,
+		rot:0,
+		vx:(10+Math.random()*5)*Math.pow(-1,Math.floor(Math.random()*100)),
+		vy:(10+Math.random()*5)*Math.pow(-1,Math.floor(Math.random()*100)),
+		vr:10+Math.random()*5,
+		vrot:2*Math.pow(-1,Math.floor(Math.random()*100)),
+		color:'white',
+		increment:1,
+	};
+
+	function drawClip(ctx) {
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		ctx.fillStyle='black';
+		ctx.fillRect(0,0,canvas.width,canvas.height);
+		ctx.save();
+		ctx.fillStyle=clip.color;
+		drawStar(ctx,clip.x,clip.y,clip.r,0);
 		ctx.fill();
+		ctx.clip();
+		drawText(ctx,'canvas',canvas.width/2,1*canvas.height/10,'bold 150px Arial','center','middle','#058');
+		drawText(ctx,'canvas',canvas.width/2,3*canvas.height/10,'bold 150px Arial','center','middle','#508');
+		drawText(ctx,'canvas',canvas.width/2,5*canvas.height/10,'bold 150px Arial','center','middle','#805');
+		drawText(ctx,'canvas',canvas.width/2,7*canvas.height/10,'bold 150px Arial','center','middle','#850');
+		drawText(ctx,'canvas',canvas.width/2,9*canvas.height/10,'bold 150px Arial','center','middle','#580');
+		ctx.restore();
 	}
+	function updateClip(ctx) {
+		if(clip.r<50){
+			clip.increment=1;
+		}
+		if(clip.r>800){
+			clip.increment=0;
+		}
+		if(clip.increment==1){
+			clip.r+=clip.vr;
+		}else{
+			clip.r-=clip.vr;
+		}
+		// clip.x+=clip.vx;
+		// clip.y+=clip.vy;
+		// clip.rot+=clip.vrot;
+		// if(clip.x-clip.r<0){
+		// 	clip.x=clip.r;
+		// 	clip.vx=-clip.vx;			
+		// }
+		// if(clip.x+clip.r>canvas.width){
+		// 	clip.x=canvas.width-clip.r;
+		// 	clip.vx=-clip.vx;
+		// }
+		// if(clip.y-clip.r<0){
+		// 	clip.y=clip.r;
+		// 	clip.vy=-clip.vy;
+		// }
+		// if(clip.y+clip.r>canvas.height){
+		// 	clip.y=canvas.height-clip.r;
+		// 	clip.vy=-clip.vy;
+		// }
+	}
+
+/* 随机小球碰撞 */
+	// var balls=[];
+	// generateBalls(ctx);
+	// setInterval(function() {
+	// 	drawBalls(ctx);
+	// 	updateBalls(ctx);
+	// }, 50);
+
+	function generateBalls(ctx) {
+		for(var i=0;i<100;i++){
+			var radius=20+Math.random()*50;
+			var aBall={
+				x:Math.random()*(canvas.width-2*radius)+radius,
+				y:Math.random()*(canvas.height-2*radius)+radius,
+				vx:(5+Math.random()*5)*Math.pow(-1,Math.floor(Math.random()*100)),
+				vy:(5+Math.random()*5)*Math.pow(-1,Math.floor(Math.random()*100)),
+				radius:radius,
+				color:randomColor()
+			};
+			balls.push(aBall);
+		}
+	}
+	function drawBalls(ctx) {
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		for(var i=0;i<balls.length;i++){
+			ctx.globalCompositeOperation='lighter';
+			ctx.beginPath();
+			ctx.arc(balls[i].x,balls[i].y,balls[i].radius,0,2*Math.PI);
+			ctx.closePath();
+			ctx.fillStyle=balls[i].color;
+			ctx.fill();
+		}
+	}
+	function updateBalls(ctx) {
+		for(var i=0;i<balls.length;i++){
+			balls[i].x+=balls[i].vx;
+			balls[i].y+=balls[i].vy;
+			if(balls[i].x-balls[i].radius<0){
+				balls[i].x=balls[i].radius;
+				balls[i].vx=-balls[i].vx;
+			}
+			if(balls[i].x+balls[i].radius>canvas.width){
+				balls[i].x=canvas.width-balls[i].radius;
+				balls[i].vx=-balls[i].vx;
+			}
+			if(balls[i].y-balls[i].radius<0){
+				balls[i].y=balls[i].radius;
+				balls[i].vy=-balls[i].vy;
+			}
+			if(balls[i].y+balls[i].radius>canvas.height){
+				balls[i].y=canvas.height-balls[i].radius;
+				balls[i].vy=-balls[i].vy;
+			}
+		}
+	}
+
 			
 /* 绘制11种叠加效果 */
 	// drawComposite(ctx,'source-over');
@@ -80,13 +221,19 @@ function fillTriangle(ctx,x1,y1,x2,y2,x3,y3){
 	ctx.fill();
 }
 function pathTriangle(ctx,x1,y1,x2,y2,x3,y3){
-	ctx.beginPath();
 	ctx.moveTo(x1,y1);
 	ctx.lineTo(x2,y2);
 	ctx.lineTo(x3,y3);
 	ctx.closePath();
 }	
 
+function pathRect(ctx,x,y,width,height){
+	ctx.moveTo(x,y);
+	ctx.lineTo(x,y+height);
+	ctx.lineTo(x+width,y+height);
+	ctx.lineTo(x+width,y);
+	ctx.closePath();
+}
 /* 文字和图形的阴影效果 */
 	// ctx.shadowColor='gray';
 	// ctx.shadowOffsetX=10;
