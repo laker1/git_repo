@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>canvasEvent</title>
+<style>
+.canvas-wrap{
+	position:relative;
+}
+.canvas-wrap .controller{
+	position:absolute;
+	left:20px;
+	top: 20px;
+	background-color: rgba(0,85,116,0.5);
+	padding: 15px 20px;
+	border-radius:10px;
+}
+.controller h1{
+	text-align:center;
+	color: #fff;
+}
+.controller .btn{
+	display: inline-block;
+	border-radius: 5px;
+	padding: 0 15px;
+	height: 20px;
+	text-decoration: none;
+	vertical-align: middle;
+	box-sizing: border-box;
+}
+.controller .play{
+	color: #fff;
+	font-size:12px;
+	line-height: 20px;
+	background-color: #8c0;
+	margin-right:20px;
+}
+.controller .color{
+	width:35px;
+}
+.controller .white{
+	background-color: #fff;
+	margin-right:10px;
+}
+.controller .black{
+	background-color: #000;
+}
+</style>
+</head>
+<body>
+<div class="canvas-wrap">
+	<canvas id="canvas" style="border:1px solid #ccc"></canvas>
+	<div class="controller">
+		<h1>canvas绘图之旅</h1>
+		<a href="#" class="btn play" id="play-btn">停止运动</a>
+		<a href="#" class="btn color white" id="color-white"></a>
+		<a href="#" class="btn color black" id="color-black"></a>
+	</div>
+</div>
+<script>
+	var canvas=document.getElementById('canvas');
+	canvas.width=1200;
+	canvas.height=800;
+	if(!canvas.getContext){
+		alert('浏览器不支持canvas');
+	}
+	var ctx=canvas.getContext('2d');
+	var balls=[];
+	var isMoving=true;
+	var themeColor='white';
+	generatePlayBalls(ctx);
+	setInterval(function() {
+		drawPlayBalls(ctx);
+		if(isMoving){
+			updatePlayBalls(ctx);
+		}
+	}, 50);
+	var play=document.getElementById('play-btn');
+	var white=document.getElementById('color-white');
+	var black=document.getElementById('color-black');
+	play.onclick=function(){
+		isMoving=!isMoving;
+	}
+	white.onclick=function(){
+		themeColor='white';
+	}
+	black.onclick=function(){
+		themeColor='black';
+	}
+	
+	function generatePlayBalls(ctx) {
+		var radius;
+		for(var i=0;i<100;i++){
+			radius=Math.random()*50+20;
+			balls.push({
+				x:Math.random()*(canvas.width-2*radius)+radius,
+				y:Math.random()*(canvas.height-2*radius)+radius,
+				vx:(Math.random()*5+5)*Math.pow(-1,Math.floor(Math.random()*100)),
+				vy:(Math.random()*5+5)*Math.pow(-1,Math.floor(Math.random()*100)),
+				r:radius,
+				color:randomColor(),
+			});
+		}
+	}
+	function randomColor() {
+		return 'rgb('+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+	}
+	function drawPlayBalls(ctx) {
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		if(themeColor=='black'){
+			ctx.fillStyle='black';
+			ctx.fillRect(0,0,canvas.width,canvas.height);
+		}
+		for(var i=0;i<100;i++){
+			ctx.beginPath();
+			ctx.globalCompositeOperation='lighter';
+			ctx.arc(balls[i].x,balls[i].y,balls[i].r,0,2*Math.PI);
+			ctx.closePath();
+			ctx.fillStyle=balls[i].color;
+			ctx.fill();
+		}
+	}
+	function updatePlayBalls(ctx) {
+		for(var i=0;i<100;i++){
+			balls[i].x+=balls[i].vx;
+			balls[i].y+=balls[i].vy;
+			if(balls[i].x-balls[i].r<0){
+				balls[i].x=balls[i].r;
+				balls[i].vx=-balls[i].vx;
+			}
+			if(balls[i].x+balls[i].r>canvas.width){
+				balls[i].x=canvas.width-balls[i].r;
+				balls[i].vx=-balls[i].vx;
+			}
+			if(balls[i].y-balls[i].r<0){
+				balls[i].y=balls[i].r;
+				balls[i].vy=-balls[i].vy;
+			}
+			if(balls[i].y+balls[i].r>canvas.height){
+				balls[i].y=canvas.height-balls[i].r;
+				balls[i].vy=-balls[i].vy;
+			}
+		}
+	}
+</script>
+</body>
+</html>
