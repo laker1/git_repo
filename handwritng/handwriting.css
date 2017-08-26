@@ -1,0 +1,53 @@
+#canvas{
+	display:block;
+	border: 1px solid #aaa;
+	margin: 0 auto;
+}
+.text{
+	width: 300px;
+	height: 300px;
+	background-color: #ccc;
+	border: 1px solid #aaa;
+	overflow:auto;
+}
+.controller{
+	margin:15px auto;
+	text-align: center
+}
+.btn-color{
+	display:inline-block;
+	width: 40px;
+	height: 40px;
+	border:6px solid #ccc;
+	border-radius:100%;
+	margin-right:15px;
+}
+.btn-color:hover{
+	border:6px solid #aaa;
+}
+.btn-selected{
+	border:6px solid cyan;
+}
+.btn-selected:hover{
+	border-color:cyan;
+}
+.black{background-color: black; }
+.red{background-color: red; }
+.green{background-color: green; }
+.blue{background-color: blue; }
+.yellow{background-color: yellow; }
+.indigo{background-color: indigo; }
+.orange{background-color: orange; }
+.violet{background-color: violet; }
+.btn-clear{
+	border-radius:10px;
+	background-color: #425968;
+	color: #fff;
+	width: 80px;
+	height: 40px;
+    vertical-align: top;
+    box-sizing: content-box;
+    border: 6px solid #ccc;
+    font-size: 16px;
+    padding: 0;
+}
