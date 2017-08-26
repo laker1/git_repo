@@ -27,7 +27,6 @@
 	canvas.width=1200;
 	canvas.height=800;
 	var ctx=canvas.getContext('2d');
-
 	var skyStyle=ctx.createLinearGradient(0,0,canvas.width,0);
 	skyStyle.addColorStop(0.0,'yellow');
 	skyStyle.addColorStop(0.2,'blue');
@@ -36,14 +35,11 @@
 	skyStyle.addColorStop(0.8,'violet');
 	skyStyle.addColorStop(0.9,'indigo');
 	skyStyle.addColorStop(1.0,'#ba8748');
-
 	// ctx.globalAlpha=0.7;
-
 	// ctx.shadowColor='gray';
 	// ctx.shadowOffsetX=10;
 	// ctx.shadowOffsetY=10;
 	// ctx.shadowBlur=10;
-
 	var balls=[];
 	generateClickBalls(ctx);
 	drawClickBalls(ctx);
@@ -87,7 +83,6 @@
 			}
 		}
 	}
-
 /* 非零环绕原则 */
 	// ctx.beginPath();
 	// ctx.arc(600,400,300,0,2*Math.PI,true);
@@ -95,7 +90,6 @@
 	// ctx.closePath();
 	// ctx.fillStyle='#058';
 	// ctx.fill();
-
 /* 非零环绕原则 */
 	// ctx.beginPath();
 	// ctx.rect(100,100,600,600);
@@ -105,9 +99,6 @@
 	// ctx.closePath();
 	// ctx.fillStyle='#058';
 	// ctx.fill();
-
-
-
 	/* clip蒙版效果 */
 	// setInterval(function() {
 	// 	drawClip(ctx);
@@ -125,7 +116,6 @@
 		color:'white',
 		increment:1,
 	};
-
 	function drawClip(ctx) {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		ctx.fillStyle='black';
@@ -174,7 +164,6 @@
 		// 	clip.vy=-clip.vy;
 		// }
 	}
-
 /* 随机小球碰撞 */
 	// var balls=[];
 	// generateBalls(ctx);
@@ -182,7 +171,6 @@
 	// 	drawBalls(ctx);
 	// 	updateBalls(ctx);
 	// }, 50);
-
 	function generateBalls(ctx) {
 		for(var i=0;i<100;i++){
 			var radius=20+Math.random()*50;
@@ -230,7 +218,6 @@
 			}
 		}
 	}
-
 			
 /* 绘制11种叠加效果 */
 	// drawComposite(ctx,'source-over');
@@ -240,7 +227,6 @@
 	// 		drawComposite(ctx,this.text);
 	// 	}
 	// }
-
 function drawComposite(ctx,compositeStyle) {
 	// 清空画布
 	ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -269,7 +255,6 @@ function pathTriangle(ctx,x1,y1,x2,y2,x3,y3){
 	ctx.lineTo(x3,y3);
 	ctx.closePath();
 }	
-
 function pathRect(ctx,x,y,width,height){
 	ctx.moveTo(x,y);
 	ctx.lineTo(x,y+height);
@@ -284,14 +269,12 @@ function pathRect(ctx,x,y,width,height){
 	// ctx.shadowBlur=5;
 	// drawText(ctx,'canvas',canvas.width/2,canvas.height/2,'bold 120px Arial','center','middle','#058');
 	// drawStar(ctx,400,400,300,0);
-
 	function randomColor() {
 		var R=Math.floor(Math.random()*255);
 		var G=Math.floor(Math.random()*255);
 		var B=Math.floor(Math.random()*255);
 		return 'rgb('+R+','+G+','+B+')';
 	}
-
 	function drawBaseline(ctx,h) {
 		ctx.beginPath();
 		ctx.moveTo(0,h);
@@ -307,9 +290,7 @@ function pathRect(ctx,x,y,width,height){
 	// ctx.font='bolder 40px Arial';
 	// ctx.strokeText('欢迎大家学习《Canvas绘图接口详解》！',40,400,1000);
 	
-
 /* 绘制图片砖墙背景 */
-
 	// var bg=new Image();
 	// bg.src='bricks.jpg';
 	// bg.onload=function(){
@@ -317,9 +298,7 @@ function pathRect(ctx,x,y,width,height){
 	// 	ctx.fillStyle=ptn;
 	// 	ctx.fillRect(0,0,canvas.width,canvas.height);
 	// }
-
 /* 绘制canvas背景 */
-
 	function createBackgroundCanvas() {
 		var bc=document.createElement('canvas');
 		bc.width=100;	bc.height=100;
@@ -330,15 +309,12 @@ function pathRect(ctx,x,y,width,height){
 	// var ptn=ctx.createPattern(createBackgroundCanvas(),'repeat');
 	// ctx.fillStyle=ptn;
 	// ctx.fillRect(0,0,canvas.width,canvas.height);
-
 /* 绘制星空 */
-
 // var skyStyle=ctx.createRadialGradient(canvas.width/2,canvas.height,0,canvas.width/2,canvas.height,400);
 // skyStyle.addColorStop(0.0,'#058');
 // skyStyle.addColorStop(1.0,'#000');
 // ctx.fillStyle=skyStyle;
 // ctx.fillRect(0,0,canvas.width,canvas.height);
-
 // for(var i=0;i<200;i++){
 // 	var r=Math.random()*5+5;
 // 	var x=Math.abs(Math.random()*canvas.width-20)+10;
@@ -350,12 +326,7 @@ function pathRect(ctx,x,y,width,height){
 // drawLand(ctx);
 // drawText(ctx,'欢迎大家学习《Canvas绘图接口详解》',30,canvas.height-100,'bold 35px sans-serif','left','bottom');
 // drawText(ctx,'———— liuyubobo @慕课网 荣誉出品',canvas.width-30,canvas.height-30,'bold 35px sans-serif','right','bottom');
-
-
-
-
 /* 绘制文字 */
-
 function drawText(ctx,str,x,y,font,textAlign,textBaseline,fillStyle){
 	ctx.font=font || '12px sans-serif';
 	ctx.textAlign=textAlign || 'left';
@@ -363,19 +334,14 @@ function drawText(ctx,str,x,y,font,textAlign,textBaseline,fillStyle){
 	ctx.fillStyle=fillStyle || '#fff';
 	ctx.fillText(str,x,y);
 }
-
-
 /* 绘制2048棋盘格 */
-
 // fillRoundRect(ctx,150,150,500,500,10,'#bbada0');
 // for(var i=0;i<4;i++){
 // 	for(var j=0;j<4;j++){
 // 		fillRoundRect(ctx,170+120*i,170+120*j,100,100,10,'#ccc0b3');
 // 	}
 // }
-
 /* 绘制绿地 */
-
 function drawLand(ctx) {
 	ctx.save();
 	ctx.beginPath();
@@ -391,9 +357,7 @@ function drawLand(ctx) {
 	ctx.fill();
 	ctx.restore();
 }
-
 /* 绘制弯月 */
-
 // fillMoon(ctx,2,400,400,300,0);
 function fillMoon(ctx,d,x,y,R,rot,fillStyle){
 	ctx.save();
@@ -412,8 +376,6 @@ function pathMoon(ctx,d) {
 	ctx.arcTo(d,0,0,1,Math.sqrt(1+d*d)/d);
 	ctx.closePath();
 }
-
-
 function fillRoundRect(ctx,x,y,width,height,radius,fillStyle){
 	ctx.save();
 	ctx.translate(x,y);
@@ -442,7 +404,6 @@ function pathRoundRect(ctx,width,height,radius){
 	ctx.arc(width-radius,radius,radius,3*Math.PI/2,2*Math.PI);
 	ctx.closePath();
 }
-
 function drawStar(ctx,x,y,R,rot,fillColor){
 	ctx.save();
 	ctx.translate(x,y);
@@ -468,7 +429,6 @@ function starPath(ctx){
 			Math.sin((-18)*Math.PI/180));
 	ctx.closePath();
 }
-
 </script>
 </body>
 </html>

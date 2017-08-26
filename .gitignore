@@ -10,7 +10,7 @@ Desktop.ini
 *.egg-info
 dist
 build
-
+*.jpg
 # My configurations:
 db.ini
 deploy_key_rsa
