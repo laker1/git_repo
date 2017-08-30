@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>filter 效果</title>
+	<script src="jquery.min.js"></script>
+	<link rel="stylesheet" href="blur.css">
+</head>
+<body>
+	<div class="img-filter text-center">
+		<img src="1_1.jpg" alt="" class="img1">
+		<img src="1_1.jpg" alt="" class="img2">
+	</div>
+	<h1 class="filter-name text-center">grayscale</h1>
+	<h3 class="filter-value text-center">filter : <span>grayscale(100%)</span></h3>
+	<h3 class="filter-default text-center">default : <span>0</span></h3>
+	<div class="controller text-center">
+		<a href="javascript:;" class="btn btn-selected">grayscale</a>
+		<a href="javascript:;" class="btn">sepia</a>
+		<a href="javascript:;" class="btn">saturate</a>
+		<a href="javascript:;" class="btn">hue-rotate</a>
+		<a href="javascript:;" class="btn">invert</a>
+		<a href="javascript:;" class="btn">opacity</a>
+		<a href="javascript:;" class="btn">brightness</a>
+		<a href="javascript:;" class="btn">contrast</a>
+		<a href="javascript:;" class="btn">blur</a>
+		<a href="javascript:;" class="btn">drop-shadow</a>
+	</div>
+	<script>
+		var filterDefaultObj={
+			grayscale:0,
+			sepia:0,
+			saturate:1,
+			'hue-rotate':'0deg',
+			invert:0,
+			opacity:1,
+			brightness:1,
+			contrast:1,
+			blur:0,
+			'drop-shadow':'0 0 0 0 transparent',
+		}
+		var filterApplyVal={
+			grayscale:'grayscale(100%)',
+			sepia:'sepia(100%)',
+			saturate:'saturate(300%)',
+			'hue-rotate':'hue-rotate(120deg)',
+			invert:'invert(100%)',
+			opacity:'opacity(20%)',
+			brightness:'brightness(200%)',
+			contrast:'contrast(200%)',
+			blur:'blur(20px)',
+			'drop-shadow':'drop-shadow(10px 10px 5px blue)',
+		}
+		$(".img2").css('filter',filterApplyVal['grayscale']);
+		$(".btn").on('click',function() {
+			$(this).addClass('btn-selected').siblings().removeClass('btn-selected');
+			$(".filter-name").text($(this).text());
+			$(".filter-default span").text(filterDefaultObj[$(this).text()]);
+			$(".filter-value span").text(filterApplyVal[$(this).text()]);
+			$(".img2").css('filter',filterApplyVal[$(this).text()]);
+		})
+	</script>
+</body>
+</html>

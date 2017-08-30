@@ -1,0 +1,111 @@
+html,body{
+	margin: 0;
+	padding: 0;
+}
+.img-filter{
+	margin:0 auto;
+}
+.img-filter img{
+	width: 800px;
+	height: 600px;
+}
+.img-filter img+img{
+	margin-left: 50px;
+}
+.controller{
+	margin-top: 30px
+} 
+.controller a.btn{
+	display: inline-block;
+	width: 120px;
+	height: 35px;
+	line-height: 35px;
+	background-color: #069;
+	color: #fff;
+	text-decoration: none;
+}
+.controller a.btn+.btn{
+	margin-left: 15px;
+}
+.controller a.btn:hover{
+	background-color: red;
+}
+.controller a.btn.btn-selected{
+	background-color: red;
+}
+.text-center{
+	text-align: center;
+}
+.blur-wrapper{
+	width: 800px;
+	height: 600px;
+	margin:0 auto;
+	position: relative;
+	overflow:hidden;
+}
+.blur-wrapper #image{
+	width: 800px;
+	height: 600px;
+	filter:blur(20px);
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 0;
+}
+.blur-wrapper #canvas{
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1
+}
+.blur-wrapper .btn{
+	display: inline-block;
+	width: 100px;
+	height: 35px;
+	border-radius:6px;
+	position: absolute;
+	bottom: 50px;
+	text-decoration: none;
+	color: #fff;
+	text-align: center;
+	line-height: 35px;
+	z-index:3;
+}
+.blur-wrapper .btn-reset{
+	background-color: #069;
+	left:50px;
+}
+.blur-wrapper .btn-reset:hover{
+	background-color: #058;
+}
+.blur-wrapper .btn-show{
+	background-color: #096;
+	right:50px;
+}
+.blur-wrapper .btn-show:hover{
+	background-color: #086;
+}
+.test{
+	margin:20px;
+	text-align:center;
+}
+.test1{
+	display: inline-block;
+	border: 1px solid #aaa;
+	background-image: url(test.jpg);
+	background-color:#ccc;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 800px;
+	height: 600px;
+}
+.test1+.test1{
+	margin-left:20px;
+}
+.test1:first-child{
+	background-size:cover;
+}
+.test1:last-child{
+	background-size:contain;
+}
